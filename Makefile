@@ -7,10 +7,10 @@ ctest: wrapper_lib
 	gcc ctest.c -o ctest -lwrapper -L./ -Wl,-rpath=./
 
 wrapper_lib: custom_lib wrapper.cpp
-	g++ -fPIC -shared -o libwrapper.so wrapper.cpp -lcustom_lib -L./
+	g++ -fPIC -shared -o libwrapper.so wrapper.cpp -lcustom_lib -L./ -Wl,-rpath=./
 
 cpptest: custom_lib cpptest.cpp
-	g++ cpptest.cpp -o cpptest -lcustom_lib -L./
+	g++ cpptest.cpp -o cpptest -lcustom_lib -L./ -Wl,-rpath=./
 
 custom_lib:
 	g++ -fPIC -shared -o libcustom_lib.so custom_lib.cpp

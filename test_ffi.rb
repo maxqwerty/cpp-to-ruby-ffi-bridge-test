@@ -9,7 +9,7 @@ end
 
 module CustomLibTester
   extend FFI::Library
-  ffi_lib 'wrapper'
+  ffi_lib './libwrapper.so'
   attach_function :lib_calc, [ :int, :int], :int
 end
 
