@@ -1,18 +1,31 @@
 #!/usr/bin/env ruby
 require 'ffi'
+require 'colorize'
 
-module StdLibTester
-  extend FFI::Library
-  ffi_lib 'c'
-  attach_function :puts, [ :string], :int
-end
+CUSTOM_LIB_FUNS = [
+  [:lib_calc, [:int, :int], :int],
+  [:lib_calcf, [:float, :float], :float],
+  [:lib_get_string, [], :string],
+  [:lib_get_lib_string, [], :string]
+]
 
 module CustomLibTester
   extend FFI::Library
   ffi_lib './libwrapper.so'
-  attach_function :lib_calc, [ :int, :int], :int
+
+  CUSTOM_LIB_FUNS.each do |sign|
+    attach_function *sign
+  end
 end
 
-StdLibTester.puts 'Hello, World with FFI!!!'
+puts "Loaded functions:".yellow
+CustomLibTester.public_instance_methods.each do |method|
+  puts method.to_s.green
+end
 
-puts "ruby: #{CustomLibTester.lib_calc(10, 3)}"
+puts "Test calls:".yellow
+puts "calc: #{CustomLibTester.lib_calc(5, 3)}"
+puts "calcf: #{CustomLibTester.lib_calcf(5.5, 3.5)}"
+puts "string: #{CustomLibTester.lib_get_lib_string()}"
+puts "std::string: #{CustomLibTester.lib_get_lib_string()}"
+

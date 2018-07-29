@@ -1,5 +1,4 @@
 #include "custom_lib.h"
-#include <iostream>
 
 int calc(int i, int j)
 {
@@ -9,22 +8,21 @@ int calc(int i, int j)
   {
     res *= i;
   }
-  std::cout << "From c++:" << res << std::endl;
   return res;
 }
 
 float calcf(float i, float j)
 {
-  float res = 1;
-  int k=0;
-  for(; k < j; ++k)
-  {
-    res *= i;
-  }
-  return res;
+  return i * j;
 }
 
 const char* get_string()
 {
   return "The C-string";
 }
+
+std::string get_lib_string()
+{
+  return std::string("The C++ string class");
+}
+

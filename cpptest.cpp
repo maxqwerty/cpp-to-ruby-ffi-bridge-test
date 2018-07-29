@@ -1,11 +1,11 @@
-#include <stdio.h>
 #include "custom_lib.h"
-
+#include <iostream>
 
 int main()
 {
-  printf("%d\n", calc(3, 3));
-  printf("%f\n", calcf(2.5, 3.0));
-  printf("%s\n", get_string());
+  std::cout << calc(5, 3) << std::endl;
+  std::cout << calcf(5.5, 3.5) << std::endl;
+  std::cout << get_string() << std::endl;
+  std::cout << get_lib_string() << std::endl;
   return 0;
 }

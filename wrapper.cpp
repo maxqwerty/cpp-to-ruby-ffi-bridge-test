@@ -15,3 +15,8 @@ const char* lib_get_string()
 {
   return get_string();
 }
+
+const char* lib_get_lib_string()
+{
+  return get_lib_string().c_str();
+}
